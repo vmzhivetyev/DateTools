@@ -202,15 +202,15 @@ public extension Date {
         #if os(Linux)
             let localeFormat = String.init(format: format, getLocaleFormatUnderscoresWithValue(Double(value)) as! CVarArg)  // this may not work, unclear!!
         #else
-            let localeFormat = String.init(format: format, getLocaleFormatUnderscoresWithValue(Double(value)))
+        let localeFormat = String.init(format: format, getLocaleFormatUnderscoresWithValue(Double(value), languageCode: languageCode))
         #endif
         
         return String.init(format: DateToolsLocalizedStrings(localeFormat, languageCode: languageCode), value)
     }
     
     
-    private func getLocaleFormatUnderscoresWithValue(_ value: Double) -> String{
-        let localCode = Bundle.main.preferredLocalizations[0]
+    private func getLocaleFormatUnderscoresWithValue(_ value: Double, languageCode: String?) -> String {
+        let localCode = languageCode ?? Bundle.main.preferredLocalizations[0]
         if (localCode == "ru" || localCode == "uk") {
             let XY = Int(floor(value).truncatingRemainder(dividingBy: 100))
             let Y = Int(floor(value).truncatingRemainder(dividingBy: 10))
