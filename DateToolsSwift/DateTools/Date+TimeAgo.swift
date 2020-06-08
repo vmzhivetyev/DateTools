@@ -60,7 +60,7 @@ public extension Date {
         return self.shortTimeAgo(since:Date())
     }
     
-    func timeAgo(since date:Date, numericDates: Bool = false, numericTimes: Bool = false) -> String {
+    func timeAgo(since date:Date, numericDates: Bool = false, numericTimes: Bool = false, languageCode: String? = nil) -> String {
         let calendar = NSCalendar.current
         let unitFlags = Set<Calendar.Component>([.second,.minute,.hour,.day,.weekOfYear,.month,.year])
         let earliest = self.earlierDate(date)
@@ -77,85 +77,85 @@ public extension Date {
         //and @"This morning", @"This afternoon"
         
         if (components.year! >= 2) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d %@years ago", value: components.year!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d %@years ago", value: components.year!, languageCode: languageCode)
         }
         else if (components.year! >= 1) {
             
             if (numericDates) {
-                return DateToolsLocalizedStrings("1 year ago");
+                return DateToolsLocalizedStrings("1 year ago", languageCode: languageCode);
             }
             
-            return DateToolsLocalizedStrings("Last year");
+            return DateToolsLocalizedStrings("Last year", languageCode: languageCode);
         }
         else if (components.month! >= 2) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d %@months ago", value: components.month!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d %@months ago", value: components.month!, languageCode: languageCode)
         }
         else if (components.month! >= 1) {
             
             if (numericDates) {
-                return DateToolsLocalizedStrings("1 month ago");
+                return DateToolsLocalizedStrings("1 month ago", languageCode: languageCode);
             }
             
-            return DateToolsLocalizedStrings("Last month");
+            return DateToolsLocalizedStrings("Last month", languageCode: languageCode);
         }
         else if (components.weekOfYear! >= 2) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d %@weeks ago", value: components.weekOfYear!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d %@weeks ago", value: components.weekOfYear!, languageCode: languageCode)
         }
         else if (components.weekOfYear! >= 1) {
             
             if (numericDates) {
-                return DateToolsLocalizedStrings("1 week ago");
+                return DateToolsLocalizedStrings("1 week ago", languageCode: languageCode);
             }
             
-            return DateToolsLocalizedStrings("Last week");
+            return DateToolsLocalizedStrings("Last week", languageCode: languageCode);
         }
         else if (components.day! >= 2) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d %@days ago", value: components.day!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d %@days ago", value: components.day!, languageCode: languageCode)
         }
         else if (isYesterday) {
             if (numericDates) {
-                return DateToolsLocalizedStrings("1 day ago");
+                return DateToolsLocalizedStrings("1 day ago", languageCode: languageCode);
             }
             
-            return DateToolsLocalizedStrings("Yesterday");
+            return DateToolsLocalizedStrings("Yesterday", languageCode: languageCode);
         }
         else if (components.hour! >= 2) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d %@hours ago", value: components.hour!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d %@hours ago", value: components.hour!, languageCode: languageCode)
         }
         else if (components.hour! >= 1) {
             
             if (numericTimes) {
-                return DateToolsLocalizedStrings("1 hour ago");
+                return DateToolsLocalizedStrings("1 hour ago", languageCode: languageCode);
             }
             
-            return DateToolsLocalizedStrings("An hour ago");
+            return DateToolsLocalizedStrings("An hour ago", languageCode: languageCode);
         }
         else if (components.minute! >= 2) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d %@minutes ago", value: components.minute!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d %@minutes ago", value: components.minute!, languageCode: languageCode)
         }
         else if (components.minute! >= 1) {
             
             if (numericTimes) {
-                return DateToolsLocalizedStrings("1 minute ago");
+                return DateToolsLocalizedStrings("1 minute ago", languageCode: languageCode);
             }
             
-            return DateToolsLocalizedStrings("A minute ago");
+            return DateToolsLocalizedStrings("A minute ago", languageCode: languageCode);
         }
         else if (components.second! >= 3) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d %@seconds ago", value: components.second!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d %@seconds ago", value: components.second!, languageCode: languageCode)
         }
         else {
             
             if (numericTimes) {
-                return DateToolsLocalizedStrings("1 second ago");
+                return DateToolsLocalizedStrings("1 second ago", languageCode: languageCode);
             }
             
-            return DateToolsLocalizedStrings("Just now");
+            return DateToolsLocalizedStrings("Just now", languageCode: languageCode);
         }
     }
     
     
-    func shortTimeAgo(since date:Date) -> String {
+    func shortTimeAgo(since date:Date, languageCode: String? = nil) -> String {
         let calendar = NSCalendar.current
         let unitFlags = Set<Calendar.Component>([.second,.minute,.hour,.day,.weekOfYear,.month,.year])
         let earliest = self.earlierDate(date)
@@ -168,44 +168,44 @@ public extension Date {
         
         
         if (components.year! >= 1) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d%@y", value: components.year!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d%@y", value: components.year!, languageCode: languageCode)
         }
         else if (components.month! >= 1) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d%@M", value: components.month!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d%@M", value: components.month!, languageCode: languageCode)
         }
         else if (components.weekOfYear! >= 1) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d%@w", value: components.weekOfYear!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d%@w", value: components.weekOfYear!, languageCode: languageCode)
         }
         else if (components.day! >= 2) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d%@d", value: components.day!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d%@d", value: components.day!, languageCode: languageCode)
         }
         else if (isYesterday) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d%@d", value: 1)
+            return self.logicalLocalizedStringFromFormat(format: "%%d%@d", value: 1, languageCode: languageCode)
         }
         else if (components.hour! >= 1) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d%@h", value: components.hour!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d%@h", value: components.hour!, languageCode: languageCode)
         }
         else if (components.minute! >= 1) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d%@m", value: components.minute!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d%@m", value: components.minute!, languageCode: languageCode)
         }
         else if (components.second! >= 3) {
-            return self.logicalLocalizedStringFromFormat(format: "%%d%@s", value: components.second!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d%@s", value: components.second!, languageCode: languageCode)
         }
         else {
-            return self.logicalLocalizedStringFromFormat(format: "%%d%@s", value: components.second!)
+            return self.logicalLocalizedStringFromFormat(format: "%%d%@s", value: components.second!, languageCode: languageCode)
             //return DateToolsLocalizedStrings(@"Now"); //string not yet translated 2014.04.05
         }
     }
     
     
-    private func logicalLocalizedStringFromFormat(format: String, value: Int) -> String{
+    private func logicalLocalizedStringFromFormat(format: String, value: Int, languageCode: String?) -> String{
         #if os(Linux)
             let localeFormat = String.init(format: format, getLocaleFormatUnderscoresWithValue(Double(value)) as! CVarArg)  // this may not work, unclear!!
         #else
             let localeFormat = String.init(format: format, getLocaleFormatUnderscoresWithValue(Double(value)))
         #endif
         
-        return String.init(format: DateToolsLocalizedStrings(localeFormat), value)
+        return String.init(format: DateToolsLocalizedStrings(localeFormat, languageCode: languageCode), value)
     }
     
     
@@ -234,7 +234,7 @@ public extension Date {
     
     // MARK: - Localization
     
-    private func DateToolsLocalizedStrings(_ string: String) -> String {
+    private func DateToolsLocalizedStrings(_ string: String, languageCode: String?) -> String {
         //let classBundle = Bundle(for:TimeChunk.self as! AnyClass.Type).resourcePath!.appending("DateTools.bundle")
         
         //let bundelPath = Bundle(path:classBundle)!
@@ -243,7 +243,15 @@ public extension Date {
         // However, a seemingly-equivalent method from NSBundle is: https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSBundle.swift
             return Bundle.main.localizedString(forKey: string, value: "", table: "DateTools")
         #else
-            return NSLocalizedString(string, tableName: "DateTools", bundle: Bundle.dateToolsBundle(), value: "", comment: "")
+            let dateToolsBundle = Bundle.dateToolsBundle()
+        
+        let bundle = languageCode
+            .flatMap { dateToolsBundle.path(forResource: $0.lowercased(),
+                                            ofType: ".lproj") }
+            .flatMap { Bundle(path: $0) }
+            ?? dateToolsBundle
+        
+        return NSLocalizedString(string, tableName: "DateTools", bundle: bundle, value: "", comment: "")
         #endif
     }
     
